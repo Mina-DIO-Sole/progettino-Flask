@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-
+scale=1.0">
+
+</head>
+<body>
+<!-- se la lista contiene elementi, li mostra in un elenco -->
+{% if lista %}
+<ul>
+<!-- itera sugli elementi della lista e li visualizza -->
+{% for elemento in lista %}
+<li>
+{{ elemento }} <!-- visualizza l'elemento -->
+</li>
+{% endfor %}
+</ul>
+{% else %}
+<!-- messaggio se la lista è vuota -->
+<p>La lista è vuota.</p>
+{% endif %}
+ </body>
+</html>
