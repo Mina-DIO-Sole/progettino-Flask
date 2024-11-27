@@ -8,6 +8,12 @@ scale=1.0">
 
 </head>
 <body>
+    <!-- form per aggiungere un elemento alla lista -->
+<form action="/aggiungi" method="post">
+    <input type="text" name="elemento" placeholder="Aggiungi un elemento"
+    required>
+    <button type="submit">Aggiungi</button>
+    </form>
 <!-- se la lista contiene elementi, li mostra in un elenco -->
 {% if lista %}
 <ul>
