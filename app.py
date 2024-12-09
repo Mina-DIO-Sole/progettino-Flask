@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
+from models import db, ListaSpesa
 #inizializza l'app Flask
 app = Flask(__name__)
 
@@ -12,17 +13,22 @@ with app.app_context():
 
 lista_spesa= []
 #rotta principale
-@app.route('/aggiungi', methods=['POST'])
-def aggiungi():
-   #ttiene elemento dal form
-   elemento = request.form['elemento']
-   #aggiunge alla lista
-   if elemento:
-      lista_spesa.append(elemento)
-   return redirect(url_for('home'))
+
+
 @app.route('/')
 def home():
  return render_template('index.html', lista=lista_spesa)
+
+@app.route('/aggiungi', methods=['POST'])
+def aggiungi():
+   elemento = request.form['elemento']
+   if elemento:
+      lista_spesa.append(elemento)
+      db.session.add(nuovo_elemento) 
+      db.session.commit() 
+   return redirect(url_for('home'))
+
+
 
 
 
@@ -30,13 +36,20 @@ def home():
 def rimuovi(indice):
    if 0 <= indice < len(lista_spesa):
       lista_spesa.pop(indice)
+      db.session.delete(elemento) 
+      db.session.commit() 
       return redirect(url_for('home'))
+
+
+
+
+
 
 
 @app.route('/svuota', methods=['POST'])
 def svuota():
-    global lista_spesa  
     lista_spesa.clear()  
+    db.session.commit() #COMMENTA ???
     return redirect(url_for('home'))
 
 #avvio dell'app Flask
